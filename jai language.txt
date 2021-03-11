@@ -1,0 +1,93 @@
+vb6
+ms access
+my sql
+ms sql
+
+web :
+-html
+-css
+-javascript
+-php
+-vuetify
+-nodejs
+-laravel
+	tinker>
+
+github
+gitlab
+
+
+Department::insert(['company_code'=>'002' ,'department_code'=>'001' , 'department_name'=>'Plastic Molding' , 'created_at'=>date('Y-m-s H:i:s') , 'updated_a t'=>date('Y-m-s H:i:s') , 'updated_by'=>'34782'])
+
+
+
+Illuminate\Database\QueryException with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column ' =' in 'on clause' (SQL: select `employee_code`, `employee_name`, `company_name`, `department_name`, `section_name` from `employees` left join `companies` on `companies`.`company_code` = ` =` left join `departments` on `departments`.`department_code` = `employees`.`department_code` left join `sections` on `sections`.`section_code` = `employees`.`section_code`)'
+>>> Employee::select('employee_code' , 'employee_name' , 'company_name' , 'department_name' , 'section_name')->join('companies' , 'companies.company_code' , ' =' , 'employees.company_code')->get()
+
+
+
+answer no. 7
+>>> Employee::select('employee_code' , 'employee_name' , 'company_name' , 'department_name' , 'section_name')->leftjoin('companies' , 'companies.company_code' , '=' , 'employees.company_code') ->leftjoin('departments' , 'departments.department_code'  , '=' , 'employees.department_code')->leftjoin('sections' , 'sections.section_code' , '=' , 'employees.section_code')->get()
+
+
+
+
+
+Employee::
+select('employee_code' , 'employee_name' , 'company_name' ,  'department_name')
+->join('companies' , 'companies.company_code' , '=' , 'employees.company_code')
+->join('departments' , 'departments.department_code'  , '='  , 'employees.department_code')
+->join('departments AS B' , 'B.company_code'  , '='  , 'employees.company_code')
+->get()
+
+===department
+Employee::select('employee_code' , 'employee_name' , 'company_name' ,  'department_name')
+->join('companies' , 'companies.company_code' , '=' , 'employees.company_code')
+->join('departments' , function($join)
+ {
+	 $join->on('employees.company_code', '=', 'departments.company_code');
+	 $join->on('employees.department_code', '=', 'departments.department_code');
+		}
+)
+->get()
+
+
+
+sections
+Employee::select('employee_code' , 'employee_name' , 'company_name' ,  
+'department_name'  ,   'section_name')
+->join('companies' , 'companies.company_code' , '=' , 'employees.company_code')
+->join('sections' , function($join)
+{
+	 $join->on('employees.company_code', '=', 'sections.company_code');
+	 $join->on('employees.department_code', '=', 'sections.department_code');
+	 $join->on('employees.section_code', '=', 'sections.section_code');
+})
+->join('departments' , function($join)
+{
+	 $join->on('employees.company_code', '=', 'departments.company_code');
+	 $join->on('employees.department_code', '=', 'departments.department_code');
+})
+->get()
+
+
+
+Employee::select('employee_code'  , Employee::raw(
+		'(CASE WHEN GENDER=1 THEN 1 ELSE 0 END ) as gender1')
+		
+)  ->get()
+
+
+
+
+
+
+
+
+SECTIONS:
+ Employee::select('employee_code' , 'employee_name' , Employee::raw('case
+when gender=1 then "male" else "female" end') ,  'company_name' , 'department_name'  ,   'section_name') ->join('companies' , 'companies.company_code' , '=' , 'employees.company_code') ->join('sections' , function($join) {  $join->on('employees.company_code', '=', 'sections.company_code');  $join->on('employees.department_code', '=', 'sections.department_code');  $join->on('employees.section_code', '=', 'sections.section_code'); }) ->join('departments' , function($join) {  $join->on('employees.company_code', '=', 'departments.company_code');  $join->on('employees.department_code', '=', 'departments.department_code'); }) ->get()
+
+
+GENDER
+ Employee::select('employee_code'  , Employee::raw('(CASE WHEN GENDER=1 THEN "FEMALE" ELSE 0 END ) as gender1'))   ->get();

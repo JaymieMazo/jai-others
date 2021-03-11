@@ -1,0 +1,18 @@
+1-10
+ichi, ni,san, yon, go,roku, 
+nana, hachi, kyuu, jyuu
+
+11-20
+jyuuichi,  jyuuni ,jyuusan, jyuuyon, jyuugo,jyuuroku, jyuunana, jyuuhachi, jyuukyuu, nijyuu
+
+21-30
+nijyuuichi ,  nijyuuni ,nijyuusan,nijyuuyon, nijyuugo,nijyuuroku, nijyuunana,nijyuuhachi, nijyuukyuu, sanjyuu
+
+hyaku-hundred
+thousand-sen
+million-hyakuman
+
+
+
+
+
